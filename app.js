@@ -3,20 +3,30 @@
 const listaAmigos = []
 function agregarAmigo() {
     const newAmigo = document.getElementById('amigo').value
-    console.log(listaAmigos.push(newAmigo))
+    if (!newAmigo) {
+        alert("capo vacio")
+    }
+
+    listaAmigos.push(newAmigo)
     
-    document.getElementById('listaAmigos').innerHTML = `Lista de amigos: ${listaAmigos}`
+    document.getElementById('listaAmigos').innerHTML = `\n${listaAmigos.join("\n")}`
 
-    // if (!newAmigo) {
-    //     alert("capo vacio")
-    // }
-
+    document.getElementById('amigo').value = ''
     return listaAmigos
 }
 
 function sortearAmigo() {
-    let sorteo = Math.floor(Math.random() * listaAmigos.length) //)
-    alert(sorteo)
+    if (listaAmigos.length === 0) {
+        alert("No hay amigos en la lista para sortear");
+        return;
+    }
+
+    let sorteo = Math.floor(Math.random() * listaAmigos.length)
     const ganador = listaAmigos[sorteo]
-    alert(listaAmigos, ganador)
+    const elem = document.getElementById('resultado')
+    elem.style.color = "green"
+    elem.innerHTML = "";
+    const li = document.createElement("li");
+    li.textContent = `El ganador es: ${ganador}`;
+    elem.appendChild(li);
 }
